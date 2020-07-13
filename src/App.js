@@ -6,9 +6,11 @@ import LoginForm from './LoginForm'
 
 
 class App extends Component {
+  state = {
+    loggedIn: false,
+  };
 
-
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     firebase.initializeApp({
       apiKey: "AIzaSyAfJlNxBNnYk-9__j0rTCNTgpyFO6dElOk",
       authDomain: "native-auth-6d40b.firebaseapp.com",
@@ -20,6 +22,13 @@ class App extends Component {
       measurementId: "G-X5FCZS0HJC"
     });
 
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ loggedIn: true });
+      } else {
+        this.setState({ loggedIn: false });
+      }
+    });
   }
 
   render() {
