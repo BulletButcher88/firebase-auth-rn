@@ -5,7 +5,7 @@ import Header from './common/Header';
 import LoginForm from './LoginForm';
 import Spinner from './common/Spinner';
 import Button from './common/Button';
-import CardSection from './common/CardSection'
+import CardSection from './common/CardSection';
 
 class App extends Component {
   state = {
@@ -40,7 +40,7 @@ class App extends Component {
           <CardSection>
             <Button
               onPress={() => {
-                console.log('PRESS');
+                firebase.auth().signOut();
               }}>
               Log Out
             </Button>
@@ -49,7 +49,11 @@ class App extends Component {
       case false:
         return <LoginForm />;
       default:
-        return <Spinner size="large" />;
+        return (
+          <CardSection>
+            <Spinner size="large" />
+          </CardSection>
+        );
     }
   }
 
